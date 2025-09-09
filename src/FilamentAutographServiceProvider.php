@@ -18,11 +18,13 @@ class FilamentAutographServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name(static::$name)
+        $package
+            ->name(static::$name)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->askToStarRepoOnGitHub('saade/filament-autograph');
-            });
+            })
+            ->hasConfigFile();
 
         $configFileName = $package->shortName();
 
@@ -35,9 +37,7 @@ class FilamentAutographServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void
-    {
-    }
+    public function packageRegistered(): void {}
 
     public function packageBooted(): void
     {
